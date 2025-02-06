@@ -50,10 +50,12 @@ public class doctor_dashboard extends AppCompatActivity {
         doctorName = findViewById(R.id.doctor_name);
         specialization = findViewById(R.id.specialization);
         recyclerView = findViewById(R.id.favoritesRecyclerView);
-
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        String userId = currentUser.getUid();
+        Log.d("doremon","pubg-" + userId);
         fetchDoctorData();
-
-        BookingsAdapter adapter = new BookingsAdapter();
+        BookingsAdapter adapter = new BookingsAdapter(userId);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

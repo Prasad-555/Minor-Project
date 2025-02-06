@@ -1,6 +1,7 @@
 package com.developer.opdmanager;
 
 import android.annotation.SuppressLint;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,9 +30,9 @@ public class BookingsAdapter extends RecyclerView.Adapter<BookingsAdapter.ViewHo
     String todayString = today.format(formatter);
 
 
-    public BookingsAdapter() {
+    public BookingsAdapter(String doctorId) {
         db = FirebaseFirestore.getInstance();
-        fetchDoctorAppointments("8JVZXzZi4H4LLH9caBax");
+        fetchDoctorAppointments(doctorId);
     }
 
     private void fetchDoctorAppointments(String doctorId) {
