@@ -74,8 +74,7 @@ public class doctor_dashboard extends AppCompatActivity {
             db.collection("doctors").document(userId).get()
                     .addOnSuccessListener(documentSnapshot -> {
                         if (documentSnapshot.exists()) {
-                            // ✅ Use the correct field names (check Firestore Console)
-                            String name = documentSnapshot.getString("name");  // Changed "Name" → "name"
+                            String name = documentSnapshot.getString("name");
                             String speciality = documentSnapshot.getString("specialization");
 
                             if (name != null) {

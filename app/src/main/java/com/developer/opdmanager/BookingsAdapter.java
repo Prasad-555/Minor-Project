@@ -1,5 +1,7 @@
 package com.developer.opdmanager;
 
+import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,14 +9,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.developer.opdmanager.Booking;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.format.DateTimeFormatter;
 
 public class BookingsAdapter extends RecyclerView.Adapter<BookingsAdapter.ViewHolder> {
     private List<Booking> bookingList = new ArrayList<>();
@@ -25,9 +29,9 @@ public class BookingsAdapter extends RecyclerView.Adapter<BookingsAdapter.ViewHo
     String todayString = today.format(formatter);
 
 
-    public BookingsAdapter() {
+    public BookingsAdapter(String doctorId) {
         db = FirebaseFirestore.getInstance();
-        fetchDoctorAppointments("8JVZXzZi4H4LLH9caBax");
+        fetchDoctorAppointments(doctorId);
     }
 
     private void fetchDoctorAppointments(String doctorId) {

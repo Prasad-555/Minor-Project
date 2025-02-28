@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class search_doctor extends AppCompatActivity {
     private FirebaseFirestore db;
     private LinearLayout Linear;
     private TextView recentSearches;
+    private ImageView backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,15 +52,18 @@ public class search_doctor extends AppCompatActivity {
         categoryLabel = findViewById(R.id.categoryLabel);
         Linear = findViewById(R.id.categoryLinear);
         recentSearchesLabel = findViewById(R.id.recentSearchesLabel);
+        backButton = findViewById(R.id.backButton);
         recentSearches = findViewById(R.id.recentSearches);
         db = FirebaseFirestore.getInstance();
 
+        backButton.setOnClickListener(view -> {finish();});
         listView.setVisibility(View.GONE);
         // Set up ListView adapter
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, doctorList);
         listView.setAdapter(adapter);
 
         // Add a TextWatcher to filter the list as the user types
+
         searchInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}

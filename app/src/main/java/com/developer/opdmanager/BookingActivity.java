@@ -2,6 +2,7 @@ package com.developer.opdmanager;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -24,9 +26,49 @@ public class BookingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.schedule);
 
-        selectDateIcon = findViewById(R.id.select_date_icon);
+        TabLayout tabLayout = findViewById(R.id.tabLayoutDates);
 
-        selectDateIcon.setOnClickListener(view -> showDatePicker());
+        String today = getFormattedDate(0);
+        String tomorrow = getFormattedDate(1);
+        String dayAfterTomorrow = getFormattedDate(2);
+        if (tabLayout.getTabAt(0) != null) {
+            tabLayout.getTabAt(0).setText("Today\n" + today);
+        }
+        if (tabLayout.getTabAt(1) != null) {
+            tabLayout.getTabAt(1).setText("Tomorrow\n" + tomorrow);
+        }
+        if (tabLayout.getTabAt(2) != null) {
+            tabLayout.getTabAt(2).setText("Day After\n" + dayAfterTomorrow);
+        }
+
+         // Reference TabLayout, not TabItem
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition(); // Get the selected tab position
+                Log.d("BookingActivity", "Tab selected: " + position);
+
+                // Perform actions based on the selected tab
+                switch (position) {
+                    case 0:
+                        // Handle first tab click
+                        break;
+                    case 1:
+                        // Handle second tab click
+                        break;
+                    case 3:
+                        showDatePicker();
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {}
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
+        });
+
     }
 
     private void showDatePicker() {
@@ -45,5 +87,11 @@ public class BookingActivity extends AppCompatActivity {
                 }, year, month, day);
 
         datePickerDialog.show();
+    }
+    private String getFormattedDate(int daysToAdd) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, daysToAdd); // Add days to current date
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM", Locale.getDefault());
+        return dateFormat.format(calendar.getTime());
     }
 }

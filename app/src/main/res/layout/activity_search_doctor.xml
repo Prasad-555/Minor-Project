@@ -8,6 +8,7 @@
     tools:context=".appointment_section">
 
     <ImageView
+        android:id="@+id/backButton"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:src="@drawable/back"
@@ -20,9 +21,9 @@
 
     <EditText
         android:id="@+id/searchInput"
-        android:paddingRight="180dp"
+        android:paddingRight="0dp"
         android:layout_marginRight="15dp"
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="53dp"
         android:layout_marginTop="52dp"
         android:background="@drawable/button_border"

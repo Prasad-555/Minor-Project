@@ -40,5 +40,12 @@ public class doctor_info_card extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        ImageView backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }
